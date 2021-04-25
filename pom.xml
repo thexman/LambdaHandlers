@@ -7,11 +7,12 @@
 
 	<groupId>com.a9ski.aws.lambda</groupId>
 	<artifactId>LambdaHandlers</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>LambdaHandlers</name>
 	<url>https://github.com/thexman/LambdaHandlers</url>
 	<inceptionYear>2021</inceptionYear>
+	<description>Library with useful handlers for implementing AWS Lambda functions</description>
 	<organization>
 		<name>Kiril Arabadzhiyski</name>
 		<url>http://www.a9ski.com</url>
