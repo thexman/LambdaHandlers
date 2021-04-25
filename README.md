@@ -46,3 +46,34 @@ public class GreetingLambdaHandler extends GsonLambdaHandler<Input, Output> {
 	}
 }
 ```
+
+
+
+# Development
+
+Release maven artifact
+
+
+* Configure OSSRH account in maven `~./m2/settings.xml`
+
+```
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
+  <servers>
+    <server>
+      <id>ossrh</id>
+      <username>your-jira-id</username>
+      <password>your-jira-pwd</password>
+    </server>
+  </servers>
+</settings>
+```
+* Make sure that javadoc is compiling successfuly by invoking:
+
+```
+  mvn -Prelease clean install javadoc:jar
+```
+
+* Change `pom.xml` and remove the `-SNAPSHOT` suffix from the version.
+* Execute `./release.sh my-secret-gpg-password`
+* Go to https://oss.sonatype.org/#stagingRepositories and search a staging repository with the artifact name. Select and release it.
