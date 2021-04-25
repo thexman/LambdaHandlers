@@ -17,7 +17,7 @@ import com.google.gson.GsonBuilder;
  * @param <O>
  *            the class of the outptu object.
  */
-public abstract class LambdaHandler<I, O> implements RequestStreamHandler {
+public abstract class LambdaHandler<I, O> implements RequestStreamHandler, LambdaRequestHandler<I, O> {
 
 	/**
 	 * {@inheritDoc}
@@ -80,9 +80,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler {
 	 *            the lambda context
 	 * @return new output writer.
 	 */
-	protected OutputWriter<O> createOutputWriter(Context context) {
-		return null;
-	}
+	protected abstract OutputWriter<O> createOutputWriter(Context context);
 
 	/**
 	 * Creates a new input reader.
@@ -91,9 +89,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler {
 	 *            the lambda context.
 	 * @return new input reader.
 	 */
-	protected InputReader<I> createInputReader(Context context) {
-		return null;
-	}
+	protected abstract InputReader<I> createInputReader(Context context);
 
 	/**
 	 * Handle lambda requests.
@@ -106,6 +102,6 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler {
 	 * @throws IOException
 	 *             thrown if an error occurs.
 	 */
-	protected abstract O handleRequest(I input, LambdaContext context) throws IOException;
+	public abstract O handleRequest(I input, LambdaContext context) throws IOException;
 
 }
