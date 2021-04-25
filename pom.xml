@@ -7,7 +7,7 @@
 
 	<groupId>com.a9ski.aws.lambda</groupId>
 	<artifactId>LambdaHandlers</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 
 	<name>LambdaHandlers</name>
 	<url>https://github.com/thexman/LambdaHandlers</url>
