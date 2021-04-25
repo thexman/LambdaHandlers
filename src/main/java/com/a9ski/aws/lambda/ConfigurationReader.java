@@ -11,17 +11,33 @@ import com.google.gson.JsonObject;
  * Reads lambda configuration from map.
  */
 public class ConfigurationReader {
+	/**
+	 * Key in configuration map that contains the stage name.
+	 */
 	public static final String STAGE_ENVIRONMENT_VARIABLE_KEY = "STAGE";
+	/**
+	 * Key in configuration map that contains the stage configuration
+	 */
 	public static final String CONFIGURATION_ENVIRONMENT_VARIABLE_KEY = "CONFIGURATION";
 
+	/**
+	 * Name for the common stage.
+	 */
 	public static final String COMMON_STAGE = "all";
 
 	private final Gson gson;
 
+	/**
+	 * Creates a new reader with default Gson.
+	 */
 	public ConfigurationReader() {
 		this(new GsonBuilder().create());
 	}
 
+	/**
+	 * Creates new reader with given gson.
+	 * @param gson the Gson.
+	 */
 	public ConfigurationReader(final Gson gson) {
 		super();
 		this.gson = gson;

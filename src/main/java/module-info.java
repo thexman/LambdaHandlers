@@ -1,3 +1,6 @@
+/**
+ * Provides implementation of lambda handlers
+ */
 open module com.a9ski.aws.lambda {
 	exports com.a9ski.aws.lambda;
 	exports com.a9ski.aws.lambda.gson;

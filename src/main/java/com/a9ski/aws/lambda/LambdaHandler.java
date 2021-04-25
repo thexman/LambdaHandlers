@@ -50,12 +50,22 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 		}
 	}
 
+	/**
+	 * Logs message with LambdaLoggger from the context.
+	 * @param context the lambda context.
+	 * @param message the message to be logged.
+	 */
 	protected void log(final Context context, final String message) {
 		if (context != null && context.getLogger() != null) {
 			context.getLogger().log(message);
 		}
 	}
 
+	/**
+	 * Logs exception with LambdaLogger from the context.
+	 * @param context the lambda context.
+	 * @param ex the exception to be logged.
+	 */
 	protected void log(final Context context, final Exception ex) {
 		try (StringWriter sw = new StringWriter()) {
 			try (PrintWriter pw = new PrintWriter(sw)) {

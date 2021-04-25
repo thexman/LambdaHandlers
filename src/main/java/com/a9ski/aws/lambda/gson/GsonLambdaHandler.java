@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 public class GsonLambdaHandler<I, O> extends DelegatingLambdaHandler<I, O> {
 
 	/**
-	 * Creates a new handler for given <tt>inputClass</tt>. Uses default Gson object.
+	 * Creates a new handler for given <code>inputClass</code>. Uses default Gson object.
 	 *
 	 * @param inputClass
 	 *            the input class.
