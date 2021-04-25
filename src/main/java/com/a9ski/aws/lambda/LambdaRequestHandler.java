@@ -5,14 +5,16 @@ import java.io.IOException;
 /**
  * Interface for implementing lambda request handler.
  *
- * @param <I> the input class.
- * @param <O> the output class.
+ * @param <I>
+ *            the input class.
+ * @param <O>
+ *            the output class.
  */
 @FunctionalInterface
 public interface LambdaRequestHandler<I, O> {
 	/**
 	 * Handle lambda requests.
-	 * 
+	 *
 	 * @param input
 	 *            the lambda input.
 	 * @param context

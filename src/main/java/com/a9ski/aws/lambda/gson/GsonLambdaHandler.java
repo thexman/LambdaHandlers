@@ -17,19 +17,19 @@ public class GsonLambdaHandler<I, O> extends DelegatingLambdaHandler<I, O> {
 
 	/**
 	 * Creates a new handler for given <tt>inputClass</tt>. Uses default Gson object.
-	 * 
+	 *
 	 * @param inputClass
 	 *            the input class.
 	 * @param delegate
 	 *            the request handler.
 	 */
-	public GsonLambdaHandler(Class<I> inputClass, LambdaRequestHandler<I, O> delegate) {
+	public GsonLambdaHandler(final Class<I> inputClass, final LambdaRequestHandler<I, O> delegate) {
 		this(inputClass, delegate, new GsonBuilder().create());
 	}
 
 	/**
 	 * Creates a new handler.
-	 * 
+	 *
 	 * @param inputClass
 	 *            the input class.
 	 * @param delegate
@@ -37,7 +37,7 @@ public class GsonLambdaHandler<I, O> extends DelegatingLambdaHandler<I, O> {
 	 * @param gson
 	 *            the Gson object.
 	 */
-	public GsonLambdaHandler(Class<I> inputClass, LambdaRequestHandler<I, O> delegate, Gson gson) {
-		super(new GsonInputReader<I>(inputClass, gson), new GsonOutputWriter<O>(gson), delegate);
+	public GsonLambdaHandler(final Class<I> inputClass, final LambdaRequestHandler<I, O> delegate, final Gson gson) {
+		super(new GsonInputReader<>(inputClass, gson), new GsonOutputWriter<O>(gson), delegate);
 	}
 }

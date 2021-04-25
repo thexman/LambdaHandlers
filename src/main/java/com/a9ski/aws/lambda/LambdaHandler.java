@@ -3,6 +3,8 @@ package com.a9ski.aws.lambda;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -23,20 +25,47 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleRequest(InputStream is, OutputStream os, Context context) throws IOException {
+	public void handleRequest(final InputStream is, final OutputStream os, final Context context) throws IOException {
 		try {
 			final ConfigurationReader configReader = createConfigurationReader(context);
 			final InputReader<I> reader = createInputReader(context);
 			final OutputWriter<O> writer = createOutputWriter(context);
 			final I input = reader.read(is);
 
-			final LambdaContext ctx = LambdaContext.builder().configuration(configReader.readConfiguration(readEnvironmentVariables(context))).context(context).build();
+			log(context, "Lambda input: " + input);
 
+			//@formatter:off
+			final LambdaContext ctx = LambdaContext.builder()
+					.configuration(configReader.readConfiguration(readEnvironmentVariables(context)))
+					.context(context)
+					.build();
+			//@formatter:on
 			final O output = handleRequest(input, ctx);
 			writer.write(output, os);
+
+			log(context, "Lambda output: " + output);
 		} catch (final Exception ex) {
+			log(context, ex);
 			handleException(ex);
 		}
+	}
+
+	protected void log(final Context context, final String message) {
+		if (context != null && context.getLogger() != null) {
+			context.getLogger().log(message);
+		}
+	}
+
+	protected void log(final Context context, final Exception ex) {
+		try (StringWriter sw = new StringWriter()) {
+			try (PrintWriter pw = new PrintWriter(sw)) {
+				ex.printStackTrace(pw);
+			}
+			log(context, sw.toString());
+		} catch (final IOException iex) {
+			// should never happen, since StringWriter doesn't really close anything.
+		}
+
 	}
 
 	/**
@@ -46,7 +75,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 	 *            the lambda context.
 	 * @return map with environment variables.
 	 */
-	protected Map<String, String> readEnvironmentVariables(Context context) {
+	protected Map<String, String> readEnvironmentVariables(final Context context) {
 		return System.getenv();
 	}
 
@@ -57,7 +86,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 	 *            the lambda context.
 	 * @return a configuration reader
 	 */
-	protected ConfigurationReader createConfigurationReader(Context context) {
+	protected ConfigurationReader createConfigurationReader(final Context context) {
 		return new ConfigurationReader(new GsonBuilder().create());
 	}
 
@@ -69,7 +98,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 	 * @throws IOException
 	 *             throws an IOException to Lambda runtime.
 	 */
-	protected void handleException(Exception ex) throws IOException {
+	protected void handleException(final Exception ex) throws IOException {
 		throw new IOException("Error occurred while handling lambda request", ex);
 	}
 
@@ -93,7 +122,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 
 	/**
 	 * Handle lambda requests.
-	 * 
+	 *
 	 * @param input
 	 *            the lambda input.
 	 * @param context
@@ -102,6 +131,7 @@ public abstract class LambdaHandler<I, O> implements RequestStreamHandler, Lambd
 	 * @throws IOException
 	 *             thrown if an error occurs.
 	 */
+	@Override
 	public abstract O handleRequest(I input, LambdaContext context) throws IOException;
 
 }

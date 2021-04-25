@@ -21,7 +21,7 @@ public class GsonInputReader<I> implements InputReader<I> {
 
 	/**
 	 * Creates new reader for given input class using default Gson.
-	 * 
+	 *
 	 * @param inputClass
 	 *            the input class.
 	 */
@@ -31,7 +31,7 @@ public class GsonInputReader<I> implements InputReader<I> {
 
 	/**
 	 * Creates a new reader.
-	 * 
+	 *
 	 * @param inputClass
 	 *            the input class.
 	 * @param gson

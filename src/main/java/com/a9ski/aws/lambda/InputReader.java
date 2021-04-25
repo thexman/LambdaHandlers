@@ -12,7 +12,7 @@ import java.io.InputStream;
 public interface InputReader<I> {
 	/**
 	 * Reads input stream into object
-	 * 
+	 *
 	 * @param is
 	 *            input stream to be read.
 	 * @return parsed object.

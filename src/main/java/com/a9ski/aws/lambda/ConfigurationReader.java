@@ -22,25 +22,25 @@ public class ConfigurationReader {
 		this(new GsonBuilder().create());
 	}
 
-	public ConfigurationReader(Gson gson) {
+	public ConfigurationReader(final Gson gson) {
 		super();
 		this.gson = gson;
 	}
 
 	/**
 	 * Reads the stage name from the map.
-	 * 
+	 *
 	 * @param map
 	 *            with variables.
 	 * @return stage name.
 	 */
-	public String readStageName(Map<String, String> map) {
+	public String readStageName(final Map<String, String> map) {
 		return map.getOrDefault(STAGE_ENVIRONMENT_VARIABLE_KEY, "dev");
 	}
 
 	/**
 	 * Read the configuration from environment variables.
-	 * 
+	 *
 	 * @return the configuration as json object.
 	 */
 	public JsonObject readConfiguration() {
@@ -49,39 +49,39 @@ public class ConfigurationReader {
 
 	/**
 	 * Reads the configuration from map.
-	 * 
+	 *
 	 * @param map
 	 *            map with variables
 	 * @return the configuration as json object.
 	 */
-	public JsonObject readConfiguration(Map<String, String> map) {
+	public JsonObject readConfiguration(final Map<String, String> map) {
 		final String stageName = readStageName(map);
 		return readConfiguration(map, stageName);
 	}
 
 	/**
 	 * Reads the configuration from map.
-	 * 
+	 *
 	 * @param map
 	 *            map with variables
 	 * @param stageName
 	 *            the stage name
 	 * @return the configuration as json object.
 	 */
-	public JsonObject readConfiguration(Map<String, String> map, String stageName) {
+	public JsonObject readConfiguration(final Map<String, String> map, final String stageName) {
 		final String val = map.getOrDefault(CONFIGURATION_ENVIRONMENT_VARIABLE_KEY, "{}");
 		final JsonObject config = gson.fromJson(val, JsonObject.class);
 		final JsonObject result = getValue(config, COMMON_STAGE);
 		final JsonObject stage = getValue(config, stageName);
 
-		for (Map.Entry<String, JsonElement> entry : stage.entrySet()) {
+		for (final Map.Entry<String, JsonElement> entry : stage.entrySet()) {
 			result.add(entry.getKey(), entry.getValue().deepCopy());
 		}
 		return result;
 
 	}
 
-	private JsonObject getValue(JsonObject j, String key) {
+	private JsonObject getValue(final JsonObject j, final String key) {
 		if (j.has(key) && j.get(key).isJsonObject()) {
 			return j.get(key).getAsJsonObject();
 		} else {

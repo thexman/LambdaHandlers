@@ -11,28 +11,31 @@ import com.google.gson.GsonBuilder;
 /**
  * Writes output to stream using Gson.
  *
- * @param <O> the output class.
+ * @param <O>
+ *            the output class.
  */
 public class GsonOutputWriter<O> implements OutputWriter<O> {
 
-private final Gson gson;
-	
+	private final Gson gson;
+
 	/**
 	 * Creates a new writer using default Gson.
 	 */
 	public GsonOutputWriter() {
 		this(new GsonBuilder().create());
 	}
-	
+
 	/**
 	 * Creates a new writer.
-	 * @param gson the Gson object.
+	 *
+	 * @param gson
+	 *            the Gson object.
 	 */
 	public GsonOutputWriter(final Gson gson) {
 		super();
 		this.gson = gson;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

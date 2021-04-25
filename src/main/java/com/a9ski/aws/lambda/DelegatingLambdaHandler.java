@@ -20,7 +20,7 @@ public class DelegatingLambdaHandler<I, O> extends LambdaHandler<I, O> {
 
 	/**
 	 * Creates new handler with given input reader, output writer and request handler delegate.
-	 * 
+	 *
 	 * @param inputReader
 	 *            the input reader.
 	 * @param outputWriter
@@ -28,7 +28,7 @@ public class DelegatingLambdaHandler<I, O> extends LambdaHandler<I, O> {
 	 * @param delegate
 	 *            the request delegate.
 	 */
-	public DelegatingLambdaHandler(InputReader<I> inputReader, OutputWriter<O> outputWriter, LambdaRequestHandler<I, O> delegate) {
+	public DelegatingLambdaHandler(final InputReader<I> inputReader, final OutputWriter<O> outputWriter, final LambdaRequestHandler<I, O> delegate) {
 		super();
 		this.inputReader = inputReader;
 		this.outputWriter = outputWriter;
@@ -39,7 +39,7 @@ public class DelegatingLambdaHandler<I, O> extends LambdaHandler<I, O> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected OutputWriter<O> createOutputWriter(Context context) {
+	protected OutputWriter<O> createOutputWriter(final Context context) {
 		return outputWriter;
 	}
 
@@ -47,7 +47,7 @@ public class DelegatingLambdaHandler<I, O> extends LambdaHandler<I, O> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected InputReader<I> createInputReader(Context context) {
+	protected InputReader<I> createInputReader(final Context context) {
 		return inputReader;
 	}
 
@@ -55,7 +55,7 @@ public class DelegatingLambdaHandler<I, O> extends LambdaHandler<I, O> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public O handleRequest(I input, LambdaContext context) throws IOException {
+	public O handleRequest(final I input, final LambdaContext context) throws IOException {
 		return delegate.handleRequest(input, context);
 	}
 

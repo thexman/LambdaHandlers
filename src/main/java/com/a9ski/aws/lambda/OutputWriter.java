@@ -6,7 +6,8 @@ import java.io.OutputStream;
 /**
  * Writes output to stream.
  *
- * @param <O> the output class.
+ * @param <O>
+ *            the output class.
  */
 public interface OutputWriter<O> {
 	public void write(O output, OutputStream os) throws IOException;

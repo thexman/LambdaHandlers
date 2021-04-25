@@ -4,6 +4,6 @@ open module com.a9ski.aws.lambda {
 
 	requires transitive aws.lambda.java.core;
 	requires transitive com.google.gson;
-	
+
 	requires lombok;
 }

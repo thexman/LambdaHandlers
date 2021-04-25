@@ -3,12 +3,12 @@ package com.a9ski.aws.lambda;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.google.gson.JsonObject;
 
-import lombok.Data;
 import lombok.Builder;
+import lombok.Data;
 
 /**
  * Extended object for storing useful data like lambda runtime context, user configuration, stage name.
- * 
+ *
  */
 @Builder(toBuilder = true)
 @Data
