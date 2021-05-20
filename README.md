@@ -15,7 +15,7 @@ Library that provides convenient handler for implementing AWS Lambda functions w
 
 ## When to use what
 
-Use `GsonLambdaHandler` when the input and output can be serialized with standard Gson object and the requests can be forwarded to a delegate. Use `DelegatingLambdaHandler` when the standard Gson cannot serialize the input/output objects correctly. Use `LambdaHandler` in cases when creation of the reader and writer depends on the lambda runtime `Context`. 
+Use `GsonLambdaHandler` when the input and output can be serialized with standard Gson object and the requests can be forwarded to a delegate. Use `DelegatingLambdaHandler` when the standard Gson cannot serialize the input/output objects correctly. Use `LambdaHandler` in cases when creation of the reader and writer depends on the lambda runtime `Context`.
 
 ## Example
 
