@@ -34,17 +34,14 @@ jobs:
       run: echo "::set-output name=date::$(TZ='UTC' date +'.%Y%m%d.%H%M%S')"
     - name: Update pom version
       run:
-        sed -i s/-SNAPSHOT/${{steps.date.outputs.date}}/g pom.xml
+        sed -i s/-SNAPSHOT/${{steps.date.outputs.date}}.${{matrix.Java}}.${{matrix.os}}/g pom.xml
     - name: Build with Maven
       run: mvn -B install --file pom.xml
-    - name: Upload fat jar
-      uses: actions/upload-artifact@v1
+    - name: Copy build artifact
+      run: mkdir staging && cp target/*.jar staging
+    - name: Upload jar artifact
+      uses: actions/upload-artifact@v2
       with:
-        name: ExecutableJar
-        path: staging
-    - name: Remove old artifacts
-      uses: c-hive/gha-remove-artifacts@v1
-      with:
-        age: '1 hour'
-        skip-recent: 1
-        # skip-tags: true
+        name: LambdaHandlers.jar
+        path: staging/
+        retention-days: 90
