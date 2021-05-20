@@ -1,0 +1,12 @@
+sudo: false
+language: java
+jdk:
+  - openjdk11
+  - openjdk-ea
+  - oraclejdk11
+  - oraclejdk-ea
+
+matrix:
+  allow_failures:
+    - jdk: openjdk-ea
+    - jdk: oraclejdk-ea
